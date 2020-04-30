@@ -1,0 +1,17 @@
+{
+    "prefix": "%",
+    "token": "[REDACTED] token",
+    "defaultCooldownTime": 0,
+    "commandFlags": {
+        "name": "Command name",
+        "aliases": "Command aliases",
+        "description": "Command description",
+        "guildOnly": "Flag for server only",
+        "permissions": "Array for necessary permissions or style, probably don't use with roleOnly",
+        "roleOnly": "Array for necessary role ids or style, probably don't use with permissions",
+        "roleEnglish": "Array for necessary roles for command description",
+        "args": "Flag for if the command needs arguments",
+        "usage": "Arguments for the usage for command description",
+        "cooldown": "Command cooldown in seconds, default stored in defaultCooldownTime"
+    }
+}
