@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['welcome'],
     description: 'Removes the New Member status from mentioned users and notifies them',
     guildOnly: true,
-    roleOnly: ['[REDACTED] Mod-In-Training', '[REDACTED] Moderator', '[REDACTED] Admins'],
+    roleOnly: ['[REDACTED] @Mod-In-Training', '[REDACTED] @Moderator', '[REDACTED] @Admins'],
     roleEnglish: ['Mod-In-Training', 'Moderator', 'Admins'],
     args: true,
     usage: '<user 1> [user 2] [user 3] ...',
@@ -27,25 +27,25 @@ module.exports = {
                 continue;
             }
             data.push(user.toString() + ': ');
-            if (!member.roles.cache.has('[REDACTED] New Member')) {
+            if (!member.roles.cache.has('[REDACTED] @New Member')) {
                 data.push('Does not have New Member role.');
                 continue;
             }
-            member.roles.remove('[REDACTED] New Member', 'Processed by bot');
-            if (member.roles.cache.has('[REDACTED] removeme')) { member.roles.remove('[REDACTED] removeme', 'Processed by bot'); }
+            member.roles.remove('[REDACTED] @New Member', 'Processed by bot');
+            if (member.roles.cache.has('[REDACTED] @removeme')) { member.roles.remove('[REDACTED] @removeme', 'Processed by bot'); }
 
             // LFG Boosting Check
-            if (member.roles.cache.has('[REDACTED] LFG BOOSTING - XBOX') || member.roles.cache.has('[REDACTED] LFG BOOSTING - PC') || member.roles.cache.has('[REDACTED] LFG BOOSTING - PSN')) {
+            if (member.roles.cache.has('[REDACTED] @LFG BOOSTING - XBOX') || member.roles.cache.has('[REDACTED] @LFG BOOSTING - PC') || member.roles.cache.has('[REDACTED] @LFG BOOSTING - PSN')) {
                 try {
                     user.send('Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.\nBe sure to check out the boosting event sign up list in the #boosting-interest channel.');
                 } catch {
-                    client.channels.cache.get('[REDACTED] #member-questions').send(user.toString() + ' Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.\nBe sure to check out the boosting event sign up list in the #boosting-interest channel.');
+                    client.channels.cache.get('[REDACTED] #member-questions').send(user.toString() + ' Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.\nBe sure to check out the boosting event sign up list in the [REDACTED] #boosting-interest channel.');
                 }
                 data.push('Processed (Boosting User)');
             }
 
             // else LFG Check
-            else if (member.roles.cache.has('[REDACTED] LFG - Xbox') || member.roles.cache.has('[REDACTED] LFG - PSN') || member.roles.cache.has('[REDACTED] LFG - PC')) {
+            else if (member.roles.cache.has('[REDACTED] @LFG - Xbox') || member.roles.cache.has('[REDACTED] @LFG - PSN') || member.roles.cache.has('[REDACTED] @LFG - PC')) {
                 try {
                     user.send('Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.');
                 } catch {

@@ -33,15 +33,13 @@ const cooldowns = new Discord.Collection();
 // Once bot start
 client.once('ready', () => {
     console.log('Bot Ready');
-    const alertRole = client.guilds.resolve('[REDACTED] ACMPR').roles.fetch('[REDACTED] removeme');
-    const newMemChannel = client.guilds.resolve('[REDACTED] ACMPR').channels.resolve('[REDACTED] #new-member-questions');
     setInterval(function () {
-        client.guilds.resolve('[REDACTED] ACMPR').roles.resolve('[REDACTED] New Member').members.forEach(member => {
+        client.guilds.resolve('[REDACTED] ACMPR').roles.resolve('[REDACTED] @New Member').members.forEach(member => {
             setTimeout(function () {
-                if (member.joinedAt + 172800000 < Date.now()) { member.roles.add('[REDACTED] removeme'); }
+                if (member.joinedAt + 172800000 < Date.now()) { member.roles.add('[REDACTED] @removeme'); }
             }, 500);
         });
-        client.guilds.resolve('[REDACTED] ACMPR').channels.resolve('[REDACTED] #final-alert').send(alertRole + ' you have not completed your registrations and your accounts are marked for deletion.\nPlease complete the registration process to avoid being kicked.\nIf you have any questions regarding this, please post them in ' + newMemChannel);
+        client.guilds.resolve('[REDACTED] ACMPR').channels.resolve('[REDACTED] #final-alert').send('[REDACTED] @removeme you have not completed your registrations and your accounts are marked for deletion.\nPlease complete the registration process to avoid being kicked.\nIf you have any questions regarding this, please post them in [REDACTED] #new-member-questions');
     }, 86400000);
 });
 

@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['mdm'],
     description: 'Sends a DM to all members with a given role.',
     guildOnly: true,
-    roleOnly: ['[REDACTED] Admins'],
+    roleOnly: ['[REDACTED] @Admins'],
     roleEnglish: ['Admins'],
     args: true,
     usage: '<role> <message>',
