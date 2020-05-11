@@ -9,6 +9,8 @@
  * prune: Deletes 1-99 messages in a channel
  * final-alert: Gives all New Members with 48+ hours of server time the removeme role and sends a message in #final-alert every 24 hours
  * commandFlags: Listed in ./config.json
+ * new-member-dm: DM's any user who joins with a welcome message
+ * new-member-massdm: DM's all New Members who every 24 hours
 */
 
 // @requires
@@ -34,12 +36,25 @@ const cooldowns = new Discord.Collection();
 client.once('ready', () => {
     console.log('Bot Ready\nDate: ' + new Date(Date.now()).toString());
     setInterval(function () {
+        console.log('Final Alert');
         client.guilds.resolve('[REDACTED] ACMPR').roles.resolve('[REDACTED] @New Member').members.forEach(member => {
             setTimeout(function () {
-                if (member.joinedAt + 172800000 < Date.now()) { member.roles.add('[REDACTED] @removeme'); }
+                if (member.joinedAt + 172800000 < Date.now()) {
+                    if (member.bot) { return; }
+                    console.log(member.user.tag);
+                    member.roles.add('[REDACTED] @removeme');
+                }
             }, 500);
         });
-        client.guilds.resolve('[REDACTED] ACMPR').channels.resolve('[REDACTED] #final-alert').send('[REDACTED] @removeme you have not completed your registrations and your accounts are marked for deletion.\nPlease complete the registration process to avoid being kicked.\nIf you have any questions regarding this, please post them in <#461723073427800094>');
+        client.guilds.resolve('[REDACTED] ACMPR').channels.resolve('469218909384605708').send('[REDACTED] @removeme you have not completed your registrations and your accounts are marked for deletion.\nPlease complete the registration process to avoid being kicked.\nIf you have any questions regarding this, please post them in [REDACTED] #new-member-questions');
+        console.log('New Member DM');
+        client.guilds.resolve('[REDACTED] ACMPR').roles.resolve('[REDACTED] @New Member').members.forEach(member => {
+            setTimeout(function() {
+                if (member.bot) return;
+                console.log(member.user.tag);
+                member.send('Please remember to complete the new member registration located in #welcome-and-registration\nThose who do not complete this will have their accounts marked for deletion after 48 hours.\nIf you have any questions regarding this message or the registration process, please ask in #new-member-questions').catch();
+            }, 10000);
+        });
     }, 86400000);
 });
 
@@ -57,17 +72,17 @@ client.on('message', message => {
     if (!command) return;
     
     // Check for guildOnly flag
-    if (command.guildOnly && message.channel.type !== 'text' && message.author.id !== '[REDACTED] StarsDown64#1328') { return message.reply('I can\'t execute that command inside DMs!'); }
+    if (command.guildOnly && message.channel.type !== 'text' && message.author.id !== '[REDACTED] @StarsDown64#1328') { return message.reply('I can\'t execute that command inside DMs!'); }
     
     // Check for roleOnly flag
-    if (command.roleOnly && message.author.id !== '[REDACTED] StarsDown64#1328') {
+    if (command.roleOnly && message.author.id !== '[REDACTED] @StarsDown64#1328') {
         let flag = false;
         for (const roleId of command.roleOnly) { if (message.member.roles.cache.has(roleId)) { flag = true; } }
         if (!flag) { return message.reply('you don\'t have permission to execute that command.'); }
     }
 
     // Check for permissions flag
-    if (command.permissions && message.author.id !== '[REDACTED] StarsDown64#1328') {
+    if (command.permissions && message.author.id !== '[REDACTED] @StarsDown64#1328') {
         let flag = false;
         for (const permissionName of command.permissions) { if (message.member.hasPermission(permissionName)) { flag = true; } }
         if (!flag) { return message.reply('you don\'t have the permissions necessary to execute that command.'); }
@@ -87,7 +102,7 @@ client.on('message', message => {
     const cooldownAmount = (command.cooldown || config.defaultCooldownTime) * 1000;
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-        if (now < expirationTime && message.author.id !== '[REDACTED] StarsDown64#1328') {
+        if (now < expirationTime && message.author.id !== '[REDACTED] @StarsDown64#1328') {
             const timeLeft = (expirationTime - now) / 1000;
             return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
         }
@@ -102,6 +117,13 @@ client.on('message', message => {
         console.error(error);
         message.reply('there was an error trying to execute that command');
     }
+});
+
+// On member join
+client.on('guildMemberAdd', member => {
+    if (member.bot) { return; }
+    console.log('New Member joined: ' + member.user.tag + '\nDate: ' + new Date(Date.now).toString());
+    member.send('Welcome to Assassin\'s Creed Multiplayer Revival (ACMPR), the largest active AC Multiplayer community on the web.\nPlease check the #welcome-and-registration channel and ensure that you have completed steps 1-4 of the new member process.\nOnce you have completed this process you will be granted full access to all discord channels.\nIf you have any questions simply post them in the #new-member-questions channel and our mods will assist you.').catch();
 });
 
 // Login

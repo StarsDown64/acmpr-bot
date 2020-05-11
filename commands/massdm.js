@@ -14,7 +14,7 @@ module.exports = {
         role.members.forEach(member => {
             setTimeout(function() {
                 if (member.bot) return;
-                console.log(member.user.tag + ' ' + member.toString());
+                console.log(member.user.tag);
                 member.send(msg).catch();
             }, 10000);
         });
