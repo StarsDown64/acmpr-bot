@@ -57,7 +57,7 @@ module.exports = {
             // else
             else {
                 user.send('Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.\nAlso, did you fully understand how the @LFG roles work and where to go to assign them?').catch(() => {
-                    client.channels.cache.get('[REDACTED] #member-questions').send(user.toString() + ' Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.\nAlso, did you fully understand how the @LFG roles work and where to go to assign them?');
+                    client.channels.cache.get('[REDACTED] #member-questions').send(user.toString() + ' Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.\nAlso, did you fully understand how the @LFG roles work and where to go to assign them? If not, please DM a Staff member for help.');
                 });
                 data.push('Processed (Non-LFG User)');
             }
