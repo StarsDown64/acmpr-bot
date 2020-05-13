@@ -122,7 +122,7 @@ client.on('message', message => {
 // On member join
 client.on('guildMemberAdd', member => {
     if (member.bot) { return; }
-    console.log('New Member joined: ' + member.user.tag + '\nDate: ' + new Date(Date.now).toString());
+    console.log('New Member joined: ' + member.user.tag + '\nDate: ' + new Date(Date.now()).toString());
     member.send('Welcome to Assassin\'s Creed Multiplayer Revival (ACMPR), the largest active AC Multiplayer community on the web.\nPlease check the #welcome-and-registration channel and ensure that you have completed steps 1-4 of the new member process.\nOnce you have completed this process you will be granted full access to all discord channels.\nIf you have any questions simply post them in the #new-member-questions channel and our mods will assist you.').catch();
 });
 

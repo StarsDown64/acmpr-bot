@@ -1,6 +1,6 @@
 {
   "name": "acmpr-bot",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A bot for the ACMPR official discord",
   "main": "index.js",
   "scripts": {
