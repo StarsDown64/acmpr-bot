@@ -40,7 +40,7 @@ module.exports = {
 
             // LFG Boosting Check
             if (member.roles.cache.has('700363698224496651') || member.roles.cache.has('700363699931840706') || member.roles.cache.has('700363702406479934')) {
-                user.send('Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.\nBe sure to check out the boosting event sign up list in the #boosting-interest channel.').catch(() => {
+                user.send('Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.').catch(() => {
                     client.channels.cache.get('504295342695514113').send(user.toString() + ' Welcome to ACMPR, your new member status has been removed and you should now have full access to the discord.');
                 });
                 data.push('Processed (Boosting User)');
