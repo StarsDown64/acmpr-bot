@@ -1,11 +1,11 @@
 {
   "name": "acmpr-bot",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "A bot for the ACMPR official discord",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node . > output.log"
+    "start": "node . --trace-warnings > output.log"
   },
   "keywords": [
     "acmpr"
@@ -13,6 +13,7 @@
   "author": "StarsDown64",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0"
+    "discord.js": "^12.2.0",
+    "nodemailer": "^6.4.10"
   }
 }

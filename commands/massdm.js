@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['mdm'],
     description: 'Sends a DM to all members with a given role.',
     guildOnly: true,
-    roleOnly: ['[REDACTED] @Admins'],
+    roleOnly: ['421100726438330394'],
     roleEnglish: ['Admins'],
     args: true,
     usage: '<role> <message>',
@@ -13,9 +13,9 @@ module.exports = {
         const msg = args.slice(1).join(' ');
         role.members.forEach(member => {
             setTimeout(function() {
-                if (member.bot) return;
+                if (member.user.bot) return;
                 console.log(member.user.tag);
-                member.send(msg).catch();
+                member.send(msg).catch(() => {});
             }, 10000);
         });
     },

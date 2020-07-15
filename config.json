@@ -1,6 +1,6 @@
 {
     "prefix": "%",
-    "token": "[REDACTED] token",
+    "token": "token",
     "defaultCooldownTime": 0,
     "commandFlags": {
         "name": "Command name",
