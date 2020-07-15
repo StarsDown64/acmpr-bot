@@ -212,7 +212,7 @@ client.on('guildMemberAdd', member => {
     joinleave.send(new Discord.MessageEmbed().setColor(greenLog).setAuthor('Member Joined', member.user.displayAvatarURL()).setDescription(`${member} ${member.user.tag}`).setThumbnail(member.user.displayAvatarURL()).setTimestamp().setFooter(`ID: ${member.id}`));
 });
 client.on('guildMemberRemove', member => {
-    joinleave.send(new Discord.MessageEmbed().setColor(redLog).setAuthor('Member Joined', member.user.displayAvatarURL()).setDescription(`${member} ${member.user.tag}`).setThumbnail(member.user.displayAvatarURL()).setTimestamp().setFooter(`ID: ${member.id}`));
+    joinleave.send(new Discord.MessageEmbed().setColor(redLog).setAuthor('Member Left', member.user.displayAvatarURL()).setDescription(`${member} ${member.user.tag}`).setThumbnail(member.user.displayAvatarURL()).setTimestamp().setFooter(`ID: ${member.id}`));
 });
 client.on('guildBanAdd', (guild, user) => {
     modchanges.send(new Discord.MessageEmbed().setColor(redLog).setAuthor('Member Banned', user.displayAvatarURL()).setDescription(`${user} ${user.tag}`).setThumbnail(user.displayAvatarURL()).setTimestamp().setFooter(`ID: ${user.id}`));
