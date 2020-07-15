@@ -209,34 +209,27 @@ client.on('guildMemberAdd', member => {
 
 // Logging
 client.on('guildMemberAdd', member => {
-    console.log('guildMemberAdd');
     joinleave.send(new Discord.MessageEmbed().setColor(greenLog).setAuthor('Member Joined', member.user.displayAvatarURL()).setDescription(`${member} ${member.user.tag}`).setThumbnail(member.user.displayAvatarURL()).setTimestamp().setFooter(`ID: ${member.id}`));
 });
 client.on('guildMemberRemove', member => {
-    console.log('guildMemberRemove');
     joinleave.send(new Discord.MessageEmbed().setColor(redLog).setAuthor('Member Joined', member.user.displayAvatarURL()).setDescription(`${member} ${member.user.tag}`).setThumbnail(member.user.displayAvatarURL()).setTimestamp().setFooter(`ID: ${member.id}`));
 });
 client.on('guildBanAdd', (guild, user) => {
-    console.log('guildBanAdd');
     modchanges.send(new Discord.MessageEmbed().setColor(redLog).setAuthor('Member Banned', user.displayAvatarURL()).setDescription(`${user} ${user.tag}`).setThumbnail(user.displayAvatarURL()).setTimestamp().setFooter(`ID: ${user.id}`));
 });
 client.on('guildBanRemove', (guild, user) => {
-    console.log('guildBanRemove');
     modchanges.send(new Discord.MessageEmbed().setColor(blueLog).setAuthor('Member Unbanned', user.displayAvatarURL()).setDescription(`${user} ${user.tag}`).setThumbnail(user.displayAvatarURL()).setTimestamp().setFooter(`ID: ${user.id}`));
 });
 client.on('messageUpdate', (oldM, newM) => {
-    console.log('messageUpdate');
     if (newM.channel.id == adminchat.id) { return; }
     if (newM.author.bot) { return; }
     messageedits.send(new Discord.MessageEmbed().setColor(blueLog).setAuthor(newM.author.tag, newM.author.displayAvatarURL()).setDescription(`**Message edited in** ${newM.channel.toString()} [Jump to Message](${newM.url})`).addField('Before', '\u200B' + oldM.content).addField('After', '\u200B' + newM.content).setTimestamp().setFooter(`User ID: ${newM.author.id}`));
 });
 client.on('messageDelete', message => {
-    console.log('messageDelete');
     if (message.channel.id == adminchat.id) { return; }
     messageedits.send(new Discord.MessageEmbed().setColor(redLog).setAuthor(message.author.tag, message.author.displayAvatarURL()).setDescription(`**Message sent by** ${message.author.toString()} **deleted in** ${message.channel.toString()}\n${message.content}`).setTimestamp().setFooter(`User ID: ${message.author.id} | Message ID: ${message.id}`));
 });
 client.on('messageDeleteBulk', coll => {
-    console.log('messageDeleteBulk');
     if (coll.first().channel.id == adminchat.id) { return; }
     messageedits.send(new Discord.MessageEmbed().setColor(redLog).setDescription(`**[BULK] Bulk Delete in** ${coll.first().channel.toString()}, ${coll.size} messages deleted`).setTimestamp());
     coll.sort((mID, message) => -message.createdAt).each(message => {
@@ -245,24 +238,19 @@ client.on('messageDeleteBulk', coll => {
 })
 client.on('channelCreate', channel => {
     if (channel.type == 'dm' || channel.type == 'unknown') { return; }
-    console.log('channelCreate');
     modchanges.send(new Discord.MessageEmbed().setColor(greenLog).setDescription(`**Channel Created:** ${channel.toString()}`).setTimestamp().setFooter(`ID: ${channel.id}`));
 });
 client.on('channelDelete', channel => {
     if (channel.type == 'dm' || channel.type == 'unknown') { return; }
-    console.log('channelDelete');
     modchanges.send(new Discord.MessageEmbed().setColor(redLog).setDescription(`**Channel Deleted:** ${channel.name}`).setTimestamp().setFooter(`ID: ${channel.id}`));
 });
 client.on('roleCreate', role => {
-    console.log('roleCreate');
     modchanges.send(new Discord.MessageEmbed().setColor(greenLog).setDescription(`**Role Created:** ${role.toString()}`).setTimestamp().setFooter(`ID: ${role.id}`));
 });
 client.on('roleDelete', role => {
-    console.log('roleDelete');
     modchanges.send(new Discord.MessageEmbed().setColor(redLog).setDescription(`**Role Deleted:** ${role.name}`).setTimestamp().setFooter(`ID: ${role.id}`));
 });
 client.on('roleUpdate', (oldR, newR) => {
-    console.log('roleUpdate');
     if (newR.hexColor !== oldR.hexColor) { modchanges.send(new Discord.MessageEmbed().setColor(blueLog).setDescription(`**Role Color Changed:** ${newR.name} ${oldR.hexColor} -> ${newR.hexColor}`).setTimestamp().setFooter(`ID: ${newR.id}`)); }
     else if (newR.hoist !== oldR.hoist) { modchanges.send(new Discord.MessageEmbed().setColor(blueLog).setDescription(`**Role Hoist Changed:** ${newR.name} ${newR.hoist ? 'Members appear separate' : 'Members do not appear separate'}`).setTimestamp().setFooter(`ID: ${newR.id}`)); }
     else if (newR.mentionable !== oldR.mentionable) { modchanges.send(new Discord.MessageEmbed().setColor(blueLog).setDescription(`**Role Mention Changed:** ${newR.name} ${newR.mentionable ? 'Members can mention role' : 'Members cannot mention role'}`).setTimestamp().setFooter(`ID: ${newR.id}`)); }
@@ -272,7 +260,6 @@ client.on('roleUpdate', (oldR, newR) => {
     else { modchanges.send(new Discord.MessageEmbed().setColor(blueLog).setDescription(`**Role Updated: ${newR.name}\nCould not read change, check Audit Log`).setTimestamp().setFooter(`ID: ${newR.id}`)); }
 });
 client.on('guildMemberUpdate', (oldM, newM) => {
-    console.log('guildMemberUpdate');
     if (!newM.roles.cache.equals(oldM.roles.cache)) {
         const roleDif = newM.roles.cache.difference(oldM.roles.cache);
         roleDif.each((role, id) => {
@@ -287,7 +274,6 @@ client.on('guildMemberUpdate', (oldM, newM) => {
         misc.send(new Discord.MessageEmbed().setColor(blueLog).setAuthor(newM.user.tag, newM.user.displayAvatarURL()).setDescription(`${newM} **nickname changed**`).addField('Before', '\u200B' + oldNick).addField('After', '\u200B' + newNick).setTimestamp().setFooter(`ID: ${newM.id}`)); }
 });
 client.on('voiceStateUpdate', (oldS, newS) => {
-    console.log('voiceStateUpdate');
     if (oldS.channel == null) { misc.send(new Discord.MessageEmbed().setColor(greenLog).setAuthor(newS.member.user.tag, newS.member.user.displayAvatarURL()).setDescription(`${newS.member} **joined voice channel** \`${newS.channel.name}\``).setTimestamp().setFooter(`ID: ${newS.member.id}`)); }
     else if (newS.channel == null) { misc.send(new Discord.MessageEmbed().setColor(redLog).setAuthor(oldS.member.user.tag, oldS.member.user.displayAvatarURL()).setDescription(`${oldS.member} **left voice channel** \`${oldS.channel.name}\``).setTimestamp().setFooter(`ID: ${oldS.member.id}`)); }
     else { misc.send(new Discord.MessageEmbed().setColor(blueLog).setAuthor(newS.member.user.tag, newS.member.user.displayAvatarURL()).setDescription(`${newS.member} **moved from** \`${oldS.channel.name}\` **to** \`${newS.channel.name}\``).setTimestamp().setFooter(`ID: ${newS.member.id}`)); }
