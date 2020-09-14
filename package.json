@@ -2,18 +2,23 @@
   "name": "acmpr-bot",
   "version": "2.0.3",
   "description": "A bot for the ACMPR official discord",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node . --trace-warnings > output.log"
-  },
   "keywords": [
     "acmpr"
   ],
-  "author": "StarsDown64",
+  "homepage": "https://www.github.com/starsdown64/acmpr-bot",
+  "bugs": {
+    "url": "https://www.github.com/starsdown64/acmpr-bot/issues",
+    "email": "WDNINJ4@gmail.com"
+  },
   "license": "ISC",
+  "author": "StarsDown64 <WDNINJ4@gmail.com> (https://StarsDown64.github.io)",
+  "main": "index.js",
+  "repository": "github:starsdown64/acmpr-bot",
+  "scripts": {
+    "start": "node . --trace-warnings > output.log"
+  },
   "dependencies": {
-    "discord.js": "^12.2.0",
+    "discord.js": "^12.3.1",
     "nodemailer": "^6.4.10"
   }
 }
